@@ -1,0 +1,18 @@
+pre-commit:
+  parallel: true
+  jobs:
+    - name: lint
+      run: npm run lint -- {staged_files}
+      glob: "*.{ts,tsx,svelte,js}"
+
+    - name: format
+      run: npm run format -- {staged_files}
+      glob: "*.{ts,tsx,svelte,js,json,css}"
+
+    - name: typecheck
+      run: npm run check
+
+pre-push:
+  jobs:
+    - name: test
+      run: npm run test
